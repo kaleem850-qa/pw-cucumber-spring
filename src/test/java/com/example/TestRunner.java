@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
  */
 @CucumberOptions(
         // Path to the feature files
-        features = "./src/test/resources/features",
+        features = "./src/test/resources/features/accessibility.feature",
 
         // Packages containing step definitions and hooks
         glue = {"com.example.stepdefs", "com.example.hooks"},

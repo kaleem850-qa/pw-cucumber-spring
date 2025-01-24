@@ -12,6 +12,7 @@ This project is a test automation framework using Java, Spring Boot, Playwright,
 - **Cucumber**: Supports behavior-driven development (BDD) with Gherkin syntax.
 - **TestNG**: Used as the test runner.
 - **Java Util Logger**: Logging framework for better traceability.
+- **Axe**: For Accessibility automation
 
 ## Prerequisites
 

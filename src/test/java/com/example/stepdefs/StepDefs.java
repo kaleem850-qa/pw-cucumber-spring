@@ -1,5 +1,7 @@
 package com.example.stepdefs;
 
+import com.deque.html.axecore.playwright.AxeBuilder;
+import com.deque.html.axecore.results.AxeResults;
 import com.example.pages.HomePage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
@@ -9,11 +11,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * StepDefs class contains step definitions for Cucumber feature files.
@@ -163,4 +168,24 @@ public class StepDefs {
     public void userSelectsTheRoomToBook() {
         homePage.bookRoomComponent.selectRoom(); // Clicks the 'Book this room' button
     }
+
+    /**
+     * This method validates that the current page complies with accessibility standards.
+     * It performs an accessibility scan using the Axe framework and asserts that no violations are found.
+     */
+    @Then("user see no issues as per accessibility standards")
+    public void userSeeNoIssuesAsPerAccessibilityStandards() {
+        // Perform an accessibility scan on the current page using Axe.
+        // `homePage.getPage()` retrieves the current Playwright page instance.
+        AxeResults accessibilityScanResults = new AxeBuilder(homePage.getPage()).analyze();
+
+        // Log the total number of accessibility violations detected during the scan.
+        // This provides visibility into the issues found (if any) for debugging purposes.
+        LOG.info(String.valueOf("Total number of violations: " + accessibilityScanResults.getViolations().size()));
+
+        // Assert that the list of violations is empty.
+        // If violations are present, the test will fail, highlighting the accessibility issues.
+        assertEquals(accessibilityScanResults.getViolations(), Collections.emptyList());
+    }
+
 }

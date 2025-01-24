@@ -3,6 +3,7 @@ package com.example.pages;
 import com.example.pages.components.BookRoomComponent;
 import com.example.pages.components.ContactUsComponent;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,5 +60,9 @@ public class HomePage extends BasePage {
      */
     public void goTo() {
         page.navigate(url); // Navigate to the homepage URL
+    }
+
+    public Page getPage(){
+        return page;
     }
 }
